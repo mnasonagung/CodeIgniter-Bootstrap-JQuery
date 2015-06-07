@@ -1,27 +1,35 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Home extends CI_Controller {
+class Home extends CI_Controller
+{
+    public function index()
+    {
+        $this->load->view('home/inc/header_view');
+        $this->load->view('home/home_view');
+        $this->load->view('home/inc/footer_view');
+    }
+    
+    public function register()
+    {
+        $this->load->view('home/inc/header_view');
+        $this->load->view('home/register_view');
+        $this->load->view('home/inc/footer_view');
+    }
+    
+//    public function code()
+//    {
+//        echo hash('sha256','admin'. SALT);
+//    }
+    public function test()
+    {
+//        $q = $this->db->get('user');
+//        print_r($q->result());
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('home');
-	}
+        $result = $this->user_model->get([
+            'login'=>'sony',
+            'password'=> hash('sha256','admin' . SALT)
+        ]);   
+        
+        print_r($result);
+    }
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
